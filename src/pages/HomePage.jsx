@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
 import Card from '../components/Card';
 import List from '../components/List';
@@ -14,8 +14,10 @@ const HomePage = ({countries, setCountries}) => {
   useEffect(() => {
     if (!countries.length)
     axios.get(ALL_COUNTRIES).then(({data}) => setCountries(data));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // try
   return (
     <>
       <Controls />

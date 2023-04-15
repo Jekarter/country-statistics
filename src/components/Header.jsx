@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Container } from './Container'
-import { IoMoon, IoSunny} from 'react-icons/io5'
+import { IoMoon, IoMoonOutline, IoSunny} from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 
 const HeaderEl = styled.header`

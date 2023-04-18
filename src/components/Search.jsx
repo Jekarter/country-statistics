@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 import React from 'react'
 
-export const Search = ({ search, setSearch }) => {
 
-  const InputContainer = styled.label`
+const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
   padding 1rem 2rem;
   display: flex;
@@ -34,10 +33,14 @@ export const Search = ({ search, setSearch }) => {
     background-color: var(--colors-ui-base);
   `;
 
+
+
+export const Search = ({ search, setSearch }) => {
+
   return (
     <InputContainer>
       <IoSearch />
-      <Input onChange={(evt) => setSearch(evt.target.velue)} value={search} />
+      <Input onChange={(evt) => setSearch(evt.target.value)} value={search} />
 
     </InputContainer>
   )

@@ -1,28 +1,42 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import Card from '../components/Card';
 import List from '../components/List';
 import { ALL_COUNTRIES } from '../config';
-import Controls from '../components/Controls';
+import { Controls } from '../components/Controls';
 import { useHistory } from 'react-router-dom';
 
-const HomePage = ({countries, setCountries}) => {
-  // const [countries, setCountries] = useState([])
+const HomePage = ({ setCountries, countries }) => {
+  const [filtredCountries, setFiltredCountries] = useState(countries);
 
   const { push } = useHistory();
 
+  const handleSearch = (search, region) => {
+    let data = [...countries];
+
+    if (region) {
+      data = data.filter(c => c.region.includes(region))
+    }
+
+    if (search) {
+      data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
+    setFiltredCountries(data);
+  };
+
+
   useEffect(() => {
     if (!countries.length)
-    axios.get(ALL_COUNTRIES).then(({data}) => setCountries(data));
+      axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Controls />
+      <Controls onSearch={handleSearch} />
         <List>
-          {
-            countries.map(c => {
+          {filtredCountries.map((c) => {
               const countryInfo = {
                 img: c.flags.png,
                 name: c.name,

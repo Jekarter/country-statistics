@@ -1,34 +1,20 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
-import { useParams, useHistory } from 'react-router-dom'
+
 import { Button } from '../components/Button';
-import Info from '../components/Info';
-import { searchByCountry } from '../config';
+import { CountryDetails } from '../features/details/CountryDetails';
 
-const Details = () => {
-  const {name} = useParams();
-  const {push, goBack} = useHistory();
-  const [country, setCountry] = useState(null);
 
-  console.log(country)
-
-  useEffect(() => {
-    axios.get(searchByCountry(name)).then(
-      ({data}) => setCountry(data[0])
-    )
-  }, [name])
-
+export const Details = () => {
+  const { name } = useParams();
+  const navigate = useNavigate();
 
   return (
     <div>
-      <Button onClick={goBack}>
+      <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Back
       </Button>
-
-      {country && <Info push={push} {...country} />}
+      <CountryDetails name={name} navigate={navigate} />
     </div>
-  )
-}
-
-export default Details
+  );
+};

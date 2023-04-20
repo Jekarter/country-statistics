@@ -6,6 +6,7 @@ import { themeReducer } from './features/theme/theme-slice';
 import { controlsReducer } from './features/controls/controls-slice';
 import { countryReducer } from './features/countries/countries-slice';
 import { detailsReducer } from './features/details/details-slice';
+import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
@@ -25,3 +26,7 @@ export const store = configureStore({
     serializableCheck: false,
   })
 });
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;

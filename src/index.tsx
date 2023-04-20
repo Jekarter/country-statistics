@@ -9,7 +9,7 @@ import App from './App';
 import {store} from './store';
 
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root") as HTMLDivElement;
 const root = ReactDOMClient.createRoot(rootElement);
 
 root.render(
